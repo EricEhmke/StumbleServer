@@ -49,7 +49,7 @@ class Helper:
                     r = requests.get(site.url, allow_redirects=True)
                     if r.status_code < 400:
                         up_sites.append(site)
-                except:
+                except Exception:
                     pass
             print(
                 f"{datetime.datetime.utcnow()}: {len(up_sites)} / {len(sites)} sites up")

@@ -1,4 +1,5 @@
-import requests, time, asyncio
+import requests
+import time
 from concurrent.futures import ThreadPoolExecutor, wait
 from uuid import uuid4
 
@@ -6,13 +7,14 @@ from uuid import uuid4
 def get_site(uid, n):
     prevId = ""
     visited = set()
+    resp = {'message': "No response returned"}
     for _ in range(n):
         resp = requests.post("http://127.0.0.1:8000/getSite", json={"userId": uid, "prevId": prevId})
         j = resp.json()
         if j["siteId"] in visited:
             print(f"Repeat on {j['siteId']}")
         visited.add(j["siteId"])
-        #print(j["siteId"], prevId)
+        # print(j["siteId"], prevId)
         prevId = resp.json()["siteId"]
     return resp
 

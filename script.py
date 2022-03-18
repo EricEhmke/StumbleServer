@@ -1,19 +1,12 @@
-from typing import Optional
-from pydantic import BaseModel
 from fastapi import FastAPI
 import datetime
-import random
-from multiprocessing import Lock
-from uuid import uuid4
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
 
 import os
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from SqlAlchemyTables import *
-
+from SqlAlchemyTables import Base, Metric, Visit, User
 
 app = FastAPI()
 

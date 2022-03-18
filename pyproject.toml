@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "stumbleserver"
+name = "TechTalk stumbleserver"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "A stumbler for tech talks based on StumbleServer"
+authors = [
+  "inteoryx https://github.com/inteoryx",
+  "EricEhmke https://github.com/EricEhmke",
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"

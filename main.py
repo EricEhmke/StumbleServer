@@ -15,7 +15,7 @@ import logging.handlers as handlers
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from SqlAlchemyTables import *
+from SqlAlchemyTables import Site, User, Visit, Metric
 
 import requests
 import time

@@ -1,31 +1,31 @@
+import datetime
+import random
+import os
+import logging
+import logging.handlers as handlers
+import requests
+import time
+import threading
+
+from dotenv import load_dotenv
 from typing import Optional
 from pydantic import BaseModel
 from fastapi import FastAPI
-import datetime
-import random
 from multiprocessing import Lock
 from uuid import uuid4
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
-
-import os
-
-import logging
-import logging.handlers as handlers
-
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from SqlAlchemyTables import Site, User, Visit, Metric
 
-import requests
-import time
-import threading
+load_dotenv()
 
 
 class Helper:
     busy = Lock()
     all_sites = set()
-    secret = os.environ["SECRET_KEY"]
+    secret = os.getenv("SECRET_KEY")
     date_format = "%Y-%m-%dT%h:%m:%s"
 
     def __init__(self, sm):
@@ -132,8 +132,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-db_string = os.environ["DB_STRING"]
-engine = create_engine(db_string, echo=False, pool_size=15)
+db_string = os.getenv("DB_STRING")
+# engine = create_engine(db_string, echo=False, pool_size=15) # this is the original string but sqlite doesnt supprt pool_size
+engine = create_engine(db_string, echo=False)
 Session = sessionmaker(bind=engine)
 
 session = Session()

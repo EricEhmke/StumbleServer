@@ -3,11 +3,12 @@ import datetime
 from fastapi.middleware.cors import CORSMiddleware
 
 import os
-
+from dotenv import load_dotenv
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from SqlAlchemyTables import Base, Metric, Visit, User
 
+load_dotenv()
 app = FastAPI()
 
 app.add_middleware(
@@ -18,8 +19,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-db_string = os.environ["DB_STRING"]
-engine = create_engine(db_string, echo=False, pool_size=1)
+db_string = os.getenv("DB_STRING")
+engine = create_engine(db_string, echo=False)
 Session = sessionmaker(bind=engine)
 
 # Create all tables
